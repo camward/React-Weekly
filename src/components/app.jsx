@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import Layout from '../hoc/layout/layout';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <h1>Weekly</h1>
-        <p>example text</p>
-      </div>
+      </Layout>
     );
   }
 }
