@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {LeftMenu} from './../../components/left-menu/left-menu'
 import './layout.scss'
 
 export const LOGO = require('../../assets/images/logo.png')
@@ -13,7 +14,7 @@ class Layout extends Component {
                 </div>
                 <div className="layout_content">
                     <div className="layout_content_left">
-
+                        <LeftMenu />
                     </div>
                     <div className="layout_content_center">
                         { this.props.children }
