@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <h1>Weekly</h1>
+
       </Layout>
     );
   }
