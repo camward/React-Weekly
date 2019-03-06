@@ -1,17 +1,17 @@
 @import '../../assets/styles/variables';
 
-ul {
+.leftMenu {
   margin: 0;
   padding: 0;
 
-  li {
+  &-item {
     border: 1px solid $border-color;
     padding: 5px 10px;
     margin-bottom: -1px;
     cursor: pointer;
   }
 
-  li:hover {
+  &-item:hover {
     background-color: $btn-hover-color;
   }
 }

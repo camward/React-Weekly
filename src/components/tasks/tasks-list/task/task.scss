@@ -1,0 +1,42 @@
+@import '../../../../assets/styles/variables';
+@import '../../../../assets/styles/mixins';
+
+.taskList {
+  &_item {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    border: 1px solid $border-color;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+  }
+
+  &_item:hover {
+    box-shadow: 0 0 5px $border-color;
+  }
+
+  &_btn {
+    display: flex;
+    align-items: center;
+
+    &_i {
+      font-size: 10px;
+      border: 2px solid #000000;
+      padding: 2px 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 3px;
+
+      &-edit:hover {
+        background-color: #3589ff;
+        @include backgroundColorTransition;
+      }
+
+      &-delete:hover {
+        background-color: #ff5544;
+        @include backgroundColorTransition;
+      }
+    }
+  }
+}
