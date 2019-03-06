@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
 import {TaskList} from '../tasks/tasks-list/tasks-list'
-import {TaskAddForm} from '../tasks/task-add-form/task-add-form'
-import './content.scss'
+import {Home} from '../home/home'
+import {Route, Switch} from 'react-router-dom'
 
 export class Content extends Component {
     render() {
         return (
             <div>
-                <h1 className="contentHeader">Header</h1>
-                <TaskList />
-                <TaskAddForm />
+                <Switch>
+                    <Route path="/day/:day" component={TaskList} />
+                    <Route path="/" component={Home} />
+                </Switch>
             </div>
         )
     }

@@ -25,6 +25,13 @@
     }
   }
 
+  &_header > a {
+    display: flex;
+    align-items: center;
+    color: #000000;
+    text-decoration: none;
+  }
+
   &_content {
     display: flex;
     flex-grow: 1;
