@@ -1,0 +1,40 @@
+@import '../../../assets/styles/variables';
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+  color: $base-color;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:active {
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .3);
+}
+
+.button:disabled {
+  background: $border-color;
+  color: $base-color;
+  cursor: not-allowed;
+}
+
+.error {
+  background: $btn-error;
+}
+
+.success {
+  background: $btn-success;
+}
+
+.primary {
+  background: $btn-primary;
+  color: $background-color;
+}
