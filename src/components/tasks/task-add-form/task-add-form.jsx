@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './task-add-form.scss'
 import Button from "../../common/button/button"
 import Input from "../../common/input/input"
+import { t } from "i18next"
 
 export class TaskAddForm extends Component {
 
@@ -10,8 +11,8 @@ export class TaskAddForm extends Component {
         formControls: {
             description: {
                 value: '',
-                label: 'Описание задачи',
-                errorMessage: 'Добавьте описание',
+                label: t('form.description.label'),
+                errorMessage: t('form.description.error'),
                 valid: false,
                 touched: false,
                 validation: {
@@ -21,8 +22,8 @@ export class TaskAddForm extends Component {
             },
             time: {
                 value: '',
-                label: 'Срок выполнения',
-                errorMessage: 'Укажите срок',
+                label: t('form.time.label'),
+                errorMessage: t('form.time.error'),
                 valid: false,
                 touched: false,
                 validation: {
@@ -111,7 +112,7 @@ export class TaskAddForm extends Component {
                         disabled={!this.state.isFormValid}
                         onClick={this.addTask}
                     >
-                        Добавить задачу
+                        {t('form.button')}
                     </Button>
                 </form>
             </div>
