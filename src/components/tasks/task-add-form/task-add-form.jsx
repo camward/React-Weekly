@@ -3,10 +3,13 @@ import './task-add-form.scss'
 import Button from "../../common/button/button"
 import Input from "../../common/input/input"
 import { t } from "i18next"
+import axios from "../../../protocol/axios"
+import Loader from "../../common/loader/loader"
 
 export class TaskAddForm extends Component {
 
     state = {
+        loading: false,
         isFormValid: false,
         formControls: {
             description: {
@@ -38,8 +41,46 @@ export class TaskAddForm extends Component {
         event.preventDefault()
     }
 
-    addTask = () => {
-        console.log('add task')
+    setStatusLoader = (status) => {
+        let loading = status;
+        this.setState({
+            loading
+        });
+    }
+
+    addTask = async event => {
+        event.preventDefault();
+        this.setStatusLoader(true)
+
+        try {
+            const isFormValid = false;
+            const formControls = { ...this.state.formControls };
+            let day = window.location.pathname.match(/\w+/g)
+
+            let param = {
+                description: formControls.description.value,
+                time: formControls.time.value,
+                day: day[1]
+            }
+
+            await axios.post('/tasks.json', param)
+
+            Object.keys(formControls).forEach(objectKey => {
+                formControls[objectKey].value = "";
+            });
+
+            this.setState({
+                formControls,
+                isFormValid,
+            });
+
+            this.setStatusLoader(false)
+
+            console.log('add task')
+        } catch (e) {
+            console.log(e)
+            this.setStatusLoader(false)
+        }
     }
 
     validateControl(value, validation) {
@@ -72,7 +113,7 @@ export class TaskAddForm extends Component {
         let isFormValid = true
 
         Object.keys(formControls).forEach(name => {
-            isFormValid = formControls[name].valid && isFormValid
+            isFormValid = formControls[name].valid && formControls[name].value && isFormValid
         })
 
         this.setState({
@@ -103,18 +144,22 @@ export class TaskAddForm extends Component {
     render() {
         return (
             <div className="task-add">
-                <form onSubmit={this.submitHandler} className="task-add_form">
+                {
+                    this.state.loading
+                        ? <Loader/>
+                        : <form onSubmit={this.submitHandler} className="task-add_form">
 
-                    { this.renderInputs() }
+                            {this.renderInputs()}
 
-                    <Button
-                        className="primary"
-                        disabled={!this.state.isFormValid}
-                        onClick={this.addTask}
-                    >
-                        {t('form.button')}
-                    </Button>
-                </form>
+                            <Button
+                                className="primary"
+                                disabled={!this.state.isFormValid}
+                                onClick={this.addTask}
+                            >
+                                {t('form.button')}
+                            </Button>
+                        </form>
+                }
             </div>
         )
     }
