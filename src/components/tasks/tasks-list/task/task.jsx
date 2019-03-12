@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import classNames from 'classnames'
 import './task.scss'
 import { t } from "i18next"
+import axios from "../../../../protocol/axios"
 
 export class Task extends Component {
 
@@ -9,8 +10,14 @@ export class Task extends Component {
         console.log(`edit task ${id}`)
     }
 
-    removeTask = (id) => {
-        console.log(`remove task ${id}`)
+    removeTask = async id => {
+        try {
+            await axios.delete(`/tasks/${id}.json`)
+
+            console.log(`remove task ${id}`)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     render() {
