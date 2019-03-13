@@ -20,7 +20,7 @@
       background-color: $btn-hover-color;
     }
 
-    a.link-active {
+    &.li-active a {
       background-color: $active-link;
     }
   }

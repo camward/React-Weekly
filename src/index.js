@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import pipeline from 'promise-sequence/lib/pipeline'
 import { prepareLocale } from './locale/locale'
+import { stores } from './store'
+import { Provider } from 'mobx-react'
 
 export const LOCALE = 'ru'
 
@@ -37,9 +39,11 @@ pipeline([
 
 
 const app = (
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <Provider {...stores}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
 )
 
 function startApplication() {
