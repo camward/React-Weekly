@@ -3,46 +3,31 @@ import './task-list.scss'
 import {Task} from './task/task'
 import {TaskAddForm} from "../task-add-form/task-add-form"
 import Loader from "../../common/loader/loader"
-import axios from "../../../protocol/axios"
 import { t } from "i18next"
+import PropTypes from 'prop-types'
+import { inject, observer } from 'mobx-react'
+import { TASK_STORE } from '../../../store/'
 
+@inject(TASK_STORE)
+@observer
 export class TaskList extends Component {
 
-    state = {
-        loading: true,
-        tasks: []
+    static propTypes = {
+        taskStore: PropTypes.object
     }
 
-    async componentDidMount() {
-        try {
-            const tasks = []
-            const response = await axios.get('/tasks.json')
+    constructor(props) {
+        super(props)
+        this.getTask = () => this.props.taskStore.requestTask()
+    }
 
-            Object.keys(response.data).forEach(key => {
-                tasks.push({
-                    id: key,
-                    day: response.data[key].day,
-                    time: response.data[key].time,
-                    description: response.data[key].description
-                })
-            })
-
-            this.setState({
-                tasks,
-                loading: false
-            })
-        } catch (e) {
-            this.setState({
-                tasks: [],
-                loading: false
-            })
-            console.log(e)
-        }
+    componentWillMount() {
+        this.getTask()
     }
 
     renderTask() {
-        return (this.state.tasks.length) ?
-            this.state.tasks.map((task, index) => {
+        return (this.props.taskStore.taskList.length) ?
+            this.props.taskStore.taskList.map((task, index) => {
                 return (
                     <Task
                         key={index}
@@ -60,7 +45,7 @@ export class TaskList extends Component {
         return (
             <div>
                 {
-                    this.state.loading
+                    this.props.taskStore.loading
                         ? <Loader />
                         : <ul className="taskList">
                             <React.Fragment>
