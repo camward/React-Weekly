@@ -13,6 +13,8 @@ export class TaskStore {
         this.currentTask = task
     }
 
+    getTask = () => this.requestTask()
+
     @action
     requestTask = async () => {
         try {
@@ -31,6 +33,18 @@ export class TaskStore {
             this.loading = false
         } catch (e) {
             this.loading = false
+            console.log(e)
+        }
+    }
+
+    @action
+    removeTask = async id => {
+        try {
+            await axios.delete(`/tasks/${id}.json`)
+            if (this.currentTask) this.currentTask.loading = false
+            this.getTask()
+        } catch (e) {
+            if (this.currentTask) this.currentTask.loading = false
             console.log(e)
         }
     }

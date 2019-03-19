@@ -31,7 +31,7 @@ export class TaskList extends Component {
                 return (
                     <Task
                         key={index}
-                        id={task.id}
+                        task={task}
                         className="taskList_item"
                         description={task.description}
                         time={task.time}
