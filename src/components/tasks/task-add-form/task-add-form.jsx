@@ -3,85 +3,29 @@ import './task-add-form.scss'
 import Button from "../../common/button/button"
 import Input from "../../common/input/input"
 import { t } from "i18next"
-import axios from "../../../protocol/axios"
 import Loader from "../../common/loader/loader"
+import PropTypes from 'prop-types'
+import { inject, observer } from 'mobx-react'
+import { TASK_STORE } from '../../../store/'
 
+@inject(TASK_STORE)
+@observer
 export class TaskAddForm extends Component {
 
-    state = {
-        loading: false,
-        isFormValid: false,
-        formControls: {
-            description: {
-                value: '',
-                label: t('form.description.label'),
-                errorMessage: t('form.description.error'),
-                valid: false,
-                touched: false,
-                validation: {
-                    required: true,
-                    minLength: 1
-                }
-            },
-            time: {
-                value: '',
-                label: t('form.time.label'),
-                errorMessage: t('form.time.error'),
-                valid: false,
-                touched: false,
-                validation: {
-                    required: true,
-                    minLength: 1
-                }
-            }
-        }
+    static propTypes = {
+        taskStore: PropTypes.object
     }
 
     submitHandler = event => {
         event.preventDefault()
     }
 
-    setStatusLoader = (status) => {
-        let loading = status;
-        this.setState({
-            loading
-        });
-    }
-
     addTask = async event => {
         event.preventDefault();
-        this.setStatusLoader(true)
-
-        try {
-            const isFormValid = false;
-            const formControls = { ...this.state.formControls };
-            let day = window.location.pathname.match(/\w+/g)
-
-            let param = {
-                description: formControls.description.value,
-                time: formControls.time.value,
-                day: day[1]
-            }
-
-            await axios.post('/tasks.json', param)
-
-            Object.keys(formControls).forEach(objectKey => {
-                formControls[objectKey].value = "";
-            });
-
-            this.setState({
-                formControls,
-                isFormValid,
-            });
-
-            this.setStatusLoader(false)
-
-            console.log('add task')
-        } catch (e) {
-            console.log(e)
-            this.setStatusLoader(false)
-        }
+        this.addTaskFn()
     }
+
+    addTaskFn = () => this.props.taskStore.addTask()
 
     validateControl(value, validation) {
         if (!validation) {
@@ -102,7 +46,7 @@ export class TaskAddForm extends Component {
     }
 
     changeInput = (event, controlName) => {
-        const formControls = { ...this.state.formControls }
+        const formControls = { ...this.props.taskStore.formControls }
         const control = { ...formControls[controlName] }
 
         control.value = event.target.value
@@ -116,15 +60,13 @@ export class TaskAddForm extends Component {
             isFormValid = formControls[name].valid && formControls[name].value && isFormValid
         })
 
-        this.setState({
-            formControls,
-            isFormValid
-        })
+        this.props.taskStore.formControls = formControls
+        this.props.taskStore.isFormValid = isFormValid
     }
 
     renderInputs() {
-        return Object.keys(this.state.formControls).map((controlName, index) => {
-            const control = this.state.formControls[controlName]
+        return Object.keys(this.props.taskStore.formControls).map((controlName, index) => {
+            const control = this.props.taskStore.formControls[controlName]
             return (
                 <Input
                     key={controlName + index}
@@ -145,7 +87,7 @@ export class TaskAddForm extends Component {
         return (
             <div className="task-add">
                 {
-                    this.state.loading
+                    this.props.taskStore.loadingForm
                         ? <Loader/>
                         : <form onSubmit={this.submitHandler} className="task-add_form">
 
@@ -153,7 +95,7 @@ export class TaskAddForm extends Component {
 
                             <Button
                                 className="primary"
-                                disabled={!this.state.isFormValid}
+                                disabled={!this.props.taskStore.isFormValid}
                                 onClick={this.addTask}
                             >
                                 {t('form.button')}
