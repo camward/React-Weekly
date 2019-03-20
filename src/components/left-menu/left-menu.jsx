@@ -31,6 +31,10 @@ export class LeftMenu extends Component {
         this.getTask = () => this.props.taskStore.requestTask()
     }
 
+    getDay = () => {
+        return (this.props.dayStore.day) ? this.props.dayStore.day : window.location.pathname.match(/\w+/g)[1]
+    }
+
     setDay = (code) => {
         this.getTask()
         this.props.dayStore.setDay(code)
@@ -41,7 +45,7 @@ export class LeftMenu extends Component {
             return (
                 <li className={classNames({
                     "leftMenu-item": true,
-                    "li-active": link.code === this.props.dayStore.day
+                    "li-active": link.code === this.getDay()
                 })} key={index}>
                     <NavLink
                         to={link.to}
