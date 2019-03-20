@@ -32,7 +32,8 @@ export class LeftMenu extends Component {
     }
 
     getDay = () => {
-        return (this.props.dayStore.day) ? this.props.dayStore.day : window.location.pathname.match(/\w+/g)[1]
+        let day = window.location.pathname.match(/\w+/g)
+        return (this.props.dayStore.day) ? this.props.dayStore.day : (day) ? day[1] : ""
     }
 
     setDay = (code) => {
