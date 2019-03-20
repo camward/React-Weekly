@@ -29,6 +29,10 @@
       font-weight: bold;
       margin-left: 3px;
 
+      &-cancel {
+        background-color: $background-color;
+      }
+
       &-edit {
         background-color: $edit;
       }

@@ -13,14 +13,18 @@ export class Task extends Component {
 
     static propTypes = {
         taskStore: PropTypes.object,
-        loading: PropTypes.bool
+        loading: PropTypes.bool,
+        editMode: PropTypes.bool
     }
 
     static defaultProps = {
-        loading: false
+        loading: false,
+        editMode: false
     }
 
-    editTask = task => {
+    editTask = (task, mode) => {
+        task.editMode = mode
+        this.props.taskStore.setEditMode(mode)
         this.props.taskStore.setCurrentTask(task)
     }
 
@@ -43,10 +47,19 @@ export class Task extends Component {
                         this.props.taskStore.currentTask.id === task.id
                         ? <Loader />
                         : <span className="taskList_btn">
-                            <i className="taskList_btn_i taskList_btn_i-edit"
-                               onClick={() => this.editTask(task)}>
-                               {t('task.edit')}
-                            </i>
+                            {
+                                this.props.taskStore.currentTask &&
+                                this.props.taskStore.currentTask.editMode &&
+                                this.props.taskStore.currentTask.id === task.id
+                                ? <i className="taskList_btn_i taskList_btn_i-cancel"
+                                     onClick={() => this.editTask(task, false)}>
+                                        {t('task.cancel')}
+                                  </i>
+                                : <i className="taskList_btn_i taskList_btn_i-edit"
+                                     onClick={() => this.editTask(task, true)}>
+                                        {t('task.edit')}
+                                  </i>
+                            }
                             <i className="taskList_btn_i taskList_btn_i-delete"
                                onClick={() => this.removeTask(task)}>
                                {t('task.remove')}

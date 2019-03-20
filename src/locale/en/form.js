@@ -7,7 +7,8 @@ const FORM = {
         label: "Period of execution",
         error: "Add period"
     },
-    button: "Add task"
+    buttonAdd: "Add task",
+    buttonUpdate: "Update task"
 }
 
 module.exports = FORM

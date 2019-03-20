@@ -27,6 +27,13 @@ export class TaskAddForm extends Component {
 
     addTaskFn = () => this.props.taskStore.addTask()
 
+    updateTask = async event => {
+        event.preventDefault();
+        this.updateTaskFn()
+    }
+
+    updateTaskFn = () => this.props.taskStore.updateTask()
+
     validateControl(value, validation) {
         if (!validation) {
             return true
@@ -93,13 +100,23 @@ export class TaskAddForm extends Component {
 
                             {this.renderInputs()}
 
-                            <Button
-                                className="primary"
-                                disabled={!this.props.taskStore.isFormValid}
-                                onClick={this.addTask}
-                            >
-                                {t('form.button')}
-                            </Button>
+                            {
+                                this.props.taskStore.editMode
+                                ? <Button
+                                        className="primary"
+                                        disabled={!this.props.taskStore.isFormValid}
+                                        onClick={this.updateTask}
+                                    >
+                                        {t('form.buttonUpdate')}
+                                  </Button>
+                                : <Button
+                                        className="primary"
+                                        disabled={!this.props.taskStore.isFormValid}
+                                        onClick={this.addTask}
+                                    >
+                                        {t('form.buttonAdd')}
+                                  </Button>
+                            }
                         </form>
                 }
             </div>

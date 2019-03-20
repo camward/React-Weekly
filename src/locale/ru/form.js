@@ -7,7 +7,8 @@ const FORM = {
         label: "Срок выполнения",
         error: "Укажите срок"
     },
-    button: "Добавить задачу"
+    buttonAdd: "Добавить задачу",
+    buttonUpdate: "Обновить задачу"
 }
 
 module.exports = FORM

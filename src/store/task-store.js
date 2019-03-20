@@ -9,6 +9,7 @@ export class TaskStore {
     @observable loading = true
     @observable loadingForm = false
     @observable isFormValid = false
+    @observable editMode = false
     @observable formControls = {
         description: {
             value: '',
@@ -38,6 +39,36 @@ export class TaskStore {
     setCurrentTask = (task) => {
         console.log(`set task ${task}`)
         this.currentTask = task
+    }
+
+    @action
+    setEditMode = (mode) => {
+        console.log(`set edit mode: ${mode}`)
+        this.editMode = mode
+
+        setTimeout(() => {
+            if(mode) {
+                this.formControls.description.value = this.currentTask.description
+                this.formControls.time.value = this.currentTask.time
+
+                this.formControls.description.valid = true
+                this.formControls.description.touched = true
+                this.formControls.time.valid = true
+                this.formControls.time.touched = true
+
+                this.isFormValid = true
+            } else {
+                this.formControls.description.value = ''
+                this.formControls.time.value = ''
+
+                this.formControls.description.valid = false
+                this.formControls.description.touched = false
+                this.formControls.time.valid = false
+                this.formControls.time.touched = false
+
+                this.isFormValid = false
+            }
+        }, 0)
     }
 
     getTask = () => this.requestTask()
@@ -97,6 +128,42 @@ export class TaskStore {
     }
 
     @action
+    updateTask = async () => {
+        this.loadingForm = true
+
+        try {
+            const isFormValid = false;
+            const formControls = { ...this.formControls };
+
+            let param = {
+                description: formControls.description.value,
+                time: formControls.time.value
+            }
+
+            if (this.currentTask) {
+                await axios.put(`/tasks/${this.currentTask.id}.json`, param)
+            }
+
+            Object.keys(formControls).forEach(objectKey => {
+                formControls[objectKey].value = "";
+            });
+
+            this.formControls = formControls
+            this.isFormValid = isFormValid
+
+            this.loadingForm = false
+
+            this.setEditMode(false)
+            this.currentTask.editMode = false
+
+            this.getTask()
+        } catch (e) {
+            this.loadingForm = false
+            console.log(e)
+        }
+    }
+
+    @action
     removeTask = async id => {
         try {
             await axios.delete(`/tasks/${id}.json`)
@@ -115,6 +182,7 @@ export class TaskStore {
         this.loading = true
         this.loadingForm = false
         this.isFormValid = false
+        this.editMode = false
         this.formControls = {
             description: {
                 value: '',
