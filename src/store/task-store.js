@@ -6,7 +6,7 @@ export class TaskStore {
 
     @observable taskList = []
     @observable currentTask = null
-    @observable loading = true
+    @observable loading = false
     @observable loadingForm = false
     @observable isFormValid = false
     @observable editMode = false
@@ -75,17 +75,21 @@ export class TaskStore {
 
     @action
     requestTask = async () => {
+        this.loading = true
+
         try {
             const response = await axios.get('/tasks.json')
             this.taskList = []
 
             Object.keys(response.data).forEach(key => {
-                this.taskList.push({
-                    id: key,
-                    day: response.data[key].day,
-                    time: response.data[key].time,
-                    description: response.data[key].description
-                })
+                if(window.location.pathname.match(/\w+/g)[1] === response.data[key].day) {
+                    this.taskList.push({
+                        id: key,
+                        day: response.data[key].day,
+                        time: response.data[key].time,
+                        description: response.data[key].description
+                    })
+                }
             })
 
             this.loading = false
@@ -137,7 +141,8 @@ export class TaskStore {
 
             let param = {
                 description: formControls.description.value,
-                time: formControls.time.value
+                time: formControls.time.value,
+                day: window.location.pathname.match(/\w+/g)[1]
             }
 
             if (this.currentTask) {
@@ -179,7 +184,7 @@ export class TaskStore {
     resetStore = () => {
         this.taskList = []
         this.currentTask = null
-        this.loading = true
+        this.loading = false
         this.loadingForm = false
         this.isFormValid = false
         this.editMode = false

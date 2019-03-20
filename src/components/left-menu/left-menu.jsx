@@ -5,7 +5,7 @@ import { t } from "i18next"
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import { DAY_STORE } from '../../store/'
+import { DAY_STORE, TASK_STORE } from '../../store/'
 
 const links = [
     {to: '/day/mon', code: 'mon', exact: false},
@@ -17,12 +17,23 @@ const links = [
     {to: '/day/sun', code: 'sun', exact: false}
 ]
 
-@inject(DAY_STORE)
+@inject(DAY_STORE, TASK_STORE)
 @observer
 export class LeftMenu extends Component {
 
     static propTypes = {
         dayStore: PropTypes.object,
+        taskStore: PropTypes.object
+    }
+
+    constructor(props) {
+        super(props)
+        this.getTask = () => this.props.taskStore.requestTask()
+    }
+
+    setDay = (code) => {
+        this.getTask()
+        this.props.dayStore.setDay(code)
     }
 
     renderLinks() {
@@ -35,7 +46,7 @@ export class LeftMenu extends Component {
                     <NavLink
                         to={link.to}
                         exact={link.exact}
-                        onClick={() => this.props.dayStore.setDay(link.code)}
+                        onClick={() => this.setDay(link.code)}
                     >
                         {t(`weekDays.${link.code}`)}
                     </NavLink>
