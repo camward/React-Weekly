@@ -28,8 +28,14 @@ export class Logger extends Component {
             this.props.loggerStore.logs.map((log, index) => {
                 return (
                     <li key={index}>
-                        <span>{log.description}</span>
-                        <span>{log.date}</span>
+                        <span className="left">
+                            <span>{log.type}</span>
+                            <span>{log.date}</span>
+                        </span>
+                        <span className="right">
+                            <span>{log.source}</span>
+                            <span><b>{log.ip}</b></span>
+                        </span>
                     </li>
                 )
             }) : t('log.noResult')

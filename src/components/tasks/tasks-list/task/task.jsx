@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { TASK_STORE } from '../../../../store/'
 import Loader from "../../../common/loader/loader"
+import {LOG_TYPE} from "../../../../utils/logger-type"
+import {log} from "../../../../decorators/logger"
 
 @inject(TASK_STORE)
 @observer
@@ -28,7 +30,8 @@ export class Task extends Component {
         this.props.taskStore.setCurrentTask(task)
     }
 
-    removeTask = task => {
+    @log(LOG_TYPE.REMOVE_TASK)
+    removeTask(task) {
         task.loading = true
         this.props.taskStore.setCurrentTask(task)
 

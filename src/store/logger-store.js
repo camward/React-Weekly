@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx'
 import axios from '../protocol/axios'
+import { formatDate } from "../utils/date-utils"
 
 export class LoggerStore {
 
@@ -14,12 +15,18 @@ export class LoggerStore {
             const response = await axios.get('/logs.json')
             this.logs = []
 
-            Object.keys(response.data).forEach(key => {
-                this.logs.push({
-                    date: response.data[key].time,
-                    description: response.data[key].description
+            if (response && response.data) {
+                Object.keys(response.data).forEach(key => {
+                    this.logs.push({
+                        date: response.data[key].date,
+                        type: response.data[key].type,
+                        ip: response.data[key].ip,
+                        source: response.data[key].source
+                    })
                 })
-            })
+
+                this.logs = this.logs.slice().reverse()
+            }
 
             this.loading = false
         } catch (e) {
@@ -32,6 +39,25 @@ export class LoggerStore {
     resetStore = () => {
         this.logs = []
         this.loading = false
+    }
+
+    commit = (logType) => {
+        let logMessage = {}
+        logMessage.date = formatDate(Date.now())
+        logMessage.type = logType
+        logMessage.ip = window.location.hostname
+        logMessage.source = 'client'
+        this.addLog(logMessage)
+    }
+
+    addLog = (logMessage) => this.addLogItem(logMessage);
+
+    addLogItem = async (logMessage) => {
+        try {
+            await axios.post('/logs.json', logMessage)
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 

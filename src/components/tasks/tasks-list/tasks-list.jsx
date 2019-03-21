@@ -7,6 +7,8 @@ import { t } from "i18next"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { TASK_STORE } from '../../../store/'
+import {LOG_TYPE} from "../../../utils/logger-type"
+import {log} from "../../../decorators/logger"
 
 @inject(TASK_STORE)
 @observer
@@ -21,6 +23,7 @@ export class TaskList extends Component {
         this.getTask = () => this.props.taskStore.requestTask()
     }
 
+    @log(LOG_TYPE.GET_TASK_LIST)
     componentWillMount() {
         this.getTask()
     }

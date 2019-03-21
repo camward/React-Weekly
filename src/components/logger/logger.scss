@@ -12,5 +12,14 @@
     justify-content: space-between;
     display: flex;
     margin-bottom: 5px;
+
+    > span {
+      display: flex;
+      flex-direction: column;
+    }
+
+    > span.right {
+      text-align: right;
+    }
   }
 }

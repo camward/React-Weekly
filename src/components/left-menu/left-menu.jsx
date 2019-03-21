@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { DAY_STORE, TASK_STORE } from '../../store/'
+import { log } from "../../decorators/logger"
+import {LOG_TYPE} from "../../utils/logger-type"
 
 const links = [
     {to: '/day/mon', code: 'mon', exact: false},
@@ -36,7 +38,8 @@ export class LeftMenu extends Component {
         return (this.props.dayStore.day) ? this.props.dayStore.day : (day) ? day[1] : ""
     }
 
-    setDay = (code) => {
+    @log(LOG_TYPE.SET_MENU)
+    setDay(code) {
         this.getTask()
         this.props.dayStore.setDay(code)
     }

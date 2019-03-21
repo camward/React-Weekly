@@ -7,6 +7,8 @@ import Loader from "../../common/loader/loader"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { TASK_STORE } from '../../../store/'
+import {LOG_TYPE} from "../../../utils/logger-type"
+import {log} from "../../../decorators/logger"
 
 @inject(TASK_STORE)
 @observer
@@ -25,14 +27,20 @@ export class TaskAddForm extends Component {
         this.addTaskFn()
     }
 
-    addTaskFn = () => this.props.taskStore.addTask()
+    @log(LOG_TYPE.ADD_TASK)
+    addTaskFn() {
+        this.props.taskStore.addTask()
+    }
 
     updateTask = async event => {
         event.preventDefault();
         this.updateTaskFn()
     }
 
-    updateTaskFn = () => this.props.taskStore.updateTask()
+    @log(LOG_TYPE.UPDATE_TASK)
+    updateTaskFn() {
+        this.props.taskStore.updateTask()
+    }
 
     validateControl(value, validation) {
         if (!validation) {
