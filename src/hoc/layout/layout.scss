@@ -8,6 +8,7 @@
   &_header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 10px;
     height: 55px;
     border-bottom: 1px solid $border-color;
@@ -23,12 +24,24 @@
       padding-left: 10px;
       font-size: 20px;
     }
+
+    &__right-menu {
+      a {
+        color: $btn-primary;
+        text-decoration: none;
+
+        span {
+          text-transform: none;
+          font-size: 16px;
+        }
+      }
+    }
   }
 
   &_header > a {
     display: flex;
     align-items: center;
-    color: #000000;
+    color: $base-color;
     text-decoration: none;
   }
 

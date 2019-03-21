@@ -15,6 +15,11 @@ class Layout extends Component {
                         <img src={LOGO} alt="logo" />
                         <span>{t('common.title')}</span>
                     </Link>
+                    <div className="layout_header__right-menu">
+                        <Link to="/log">
+                            <span>{t('log.link')}</span>
+                        </Link>
+                    </div>
                 </div>
                 <div className="layout_content">
                     <div className="layout_content_left">
