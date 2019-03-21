@@ -1,0 +1,12 @@
+@import '../../../assets/styles/variables';
+
+.error {
+  border: 1px solid $btn-error;
+  border-radius: 4px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 7px;
+  padding: 5px 8px;
+  font-size: 13px;
+}

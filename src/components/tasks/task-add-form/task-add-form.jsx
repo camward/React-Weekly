@@ -9,6 +9,7 @@ import { inject, observer } from 'mobx-react'
 import { TASK_STORE } from '../../../store/'
 import {LOG_TYPE} from "../../../utils/logger-type"
 import {log} from "../../../decorators/logger"
+import Error from "../../common/error/error"
 
 @inject(TASK_STORE)
 @observer
@@ -127,6 +128,7 @@ export class TaskAddForm extends Component {
                             }
                         </form>
                 }
+                { this.props.taskStore.error ? <Error data={this.props.taskStore.error} /> : "" }
             </div>
         )
     }

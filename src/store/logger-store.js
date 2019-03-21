@@ -4,6 +4,7 @@ import { formatDate } from "../utils/date-utils"
 
 export class LoggerStore {
 
+    @observable error = null
     @observable logs = []
     @observable loading = false
 
@@ -31,12 +32,13 @@ export class LoggerStore {
             this.loading = false
         } catch (e) {
             this.loading = false
-            console.log(e)
+            this.error = e
         }
     }
 
     @action
     resetStore = () => {
+        this.error = null
         this.logs = []
         this.loading = false
     }
@@ -56,7 +58,7 @@ export class LoggerStore {
         try {
             await axios.post('/logs.json', logMessage)
         } catch (e) {
-            console.log(e)
+            this.error = e
         }
     }
 }

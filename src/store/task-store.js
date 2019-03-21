@@ -4,6 +4,7 @@ import { t } from "i18next";
 
 export class TaskStore {
 
+    @observable error = null
     @observable taskList = []
     @observable currentTask = null
     @observable loading = false
@@ -95,7 +96,7 @@ export class TaskStore {
             this.loading = false
         } catch (e) {
             this.loading = false
-            console.log(e)
+            this.error = e
         }
     }
 
@@ -127,7 +128,7 @@ export class TaskStore {
             this.getTask()
         } catch (e) {
             this.loadingForm = false
-            console.log(e)
+            this.error = e
         }
     }
 
@@ -164,7 +165,7 @@ export class TaskStore {
             this.getTask()
         } catch (e) {
             this.loadingForm = false
-            console.log(e)
+            this.error = e
         }
     }
 
@@ -176,12 +177,13 @@ export class TaskStore {
             this.getTask()
         } catch (e) {
             if (this.currentTask) this.currentTask.loading = false
-            console.log(e)
+            this.error = e
         }
     }
 
     @action
     resetStore = () => {
+        this.error = null
         this.taskList = []
         this.currentTask = null
         this.loading = false

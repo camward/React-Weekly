@@ -7,6 +7,7 @@ import { inject, observer } from 'mobx-react'
 import { LOGGER_STORE } from '../../store/'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css'
+import Error from "../common/error/error"
 
 @inject(LOGGER_STORE)
 @observer
@@ -57,7 +58,7 @@ export class Logger extends Component {
                             </ul>
                         </PerfectScrollbar>
                 }
-
+                { this.props.loggerStore.error ? <Error data={this.props.loggerStore.error} /> : "" }
             </div>
         )
     }
