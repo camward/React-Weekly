@@ -37,13 +37,11 @@ export class TaskStore {
 
     @action
     setCurrentTask = (task) => {
-        console.log(`set task ${task}`)
         this.currentTask = task
     }
 
     @action
     setEditMode = (mode) => {
-        console.log(`set edit mode: ${mode}`)
         this.editMode = mode
 
         setTimeout(() => {
@@ -81,16 +79,18 @@ export class TaskStore {
             const response = await axios.get('/tasks.json')
             this.taskList = []
 
-            Object.keys(response.data).forEach(key => {
-                if(window.location.pathname.match(/\w+/g)[1] === response.data[key].day) {
-                    this.taskList.push({
-                        id: key,
-                        day: response.data[key].day,
-                        time: response.data[key].time,
-                        description: response.data[key].description
-                    })
-                }
-            })
+            if(response && response.data) {
+                Object.keys(response.data).forEach(key => {
+                    if(window.location.pathname.match(/\w+/g)[1] === response.data[key].day) {
+                        this.taskList.push({
+                            id: key,
+                            day: response.data[key].day,
+                            time: response.data[key].time,
+                            description: response.data[key].description
+                        })
+                    }
+                })
+            }
 
             this.loading = false
         } catch (e) {

@@ -24,17 +24,19 @@ export class Task extends Component {
         editMode: false
     }
 
-    editTask = (task, mode) => {
+    @log(LOG_TYPE.EDIT_MODE)
+    @log(LOG_TYPE.CURRENT_TASK)
+    editTask(task, mode) {
         task.editMode = mode
         this.props.taskStore.setEditMode(mode)
         this.props.taskStore.setCurrentTask(task)
     }
 
     @log(LOG_TYPE.REMOVE_TASK)
+    @log(LOG_TYPE.CURRENT_TASK)
     removeTask(task) {
         task.loading = true
         this.props.taskStore.setCurrentTask(task)
-
         this.props.taskStore.removeTask(task.id)
     }
 
