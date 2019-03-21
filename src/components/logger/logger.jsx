@@ -5,6 +5,8 @@ import { t } from "i18next"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { LOGGER_STORE } from '../../store/'
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import 'react-perfect-scrollbar/dist/css/styles.css'
 
 @inject(LOGGER_STORE)
 @observer
@@ -43,15 +45,17 @@ export class Logger extends Component {
 
     render() {
         return (
-            <div>
+            <div className="logs-block">
                 {
                     this.props.loggerStore.loading
                         ? <Loader />
-                        : <ul className="logs">
-                            <React.Fragment>
-                                { this.renderLogs() }
-                            </React.Fragment>
-                        </ul>
+                        : <PerfectScrollbar>
+                            <ul className="logs-block_ul">
+                                <React.Fragment>
+                                    { this.renderLogs() }
+                                </React.Fragment>
+                            </ul>
+                        </PerfectScrollbar>
                 }
 
             </div>

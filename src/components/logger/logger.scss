@@ -1,25 +1,29 @@
 @import '../../assets/styles/variables';
 
-.logs {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.logs-block {
+  height: 799px;
 
-  li {
-    border: 1px solid $border-color;
-    padding: 5px 10px;
-    font-size: 13px;
-    justify-content: space-between;
-    display: flex;
-    margin-bottom: 5px;
+  &_ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-    > span {
+    li {
+      border: 1px solid $border-color;
+      padding: 5px 10px;
+      font-size: 13px;
+      justify-content: space-between;
       display: flex;
-      flex-direction: column;
-    }
+      margin-bottom: 5px;
 
-    > span.right {
-      text-align: right;
+      > span {
+        display: flex;
+        flex-direction: column;
+      }
+
+      > span.right {
+        text-align: right;
+      }
     }
   }
 }
