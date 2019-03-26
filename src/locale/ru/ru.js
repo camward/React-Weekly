@@ -3,6 +3,7 @@ const ERROR = require('./error')
 const FORM = require('./form')
 const TASK = require('./task')
 const LOG = require('./log')
+const MODAL = require('./modal')
 const WEEK_DAYS = require('./week-days')
 
 const RU_BUNDLE = {
@@ -12,6 +13,7 @@ const RU_BUNDLE = {
         form: FORM,
         task: TASK,
         log: LOG,
+        modal: MODAL,
         weekDays: WEEK_DAYS
     }
 }

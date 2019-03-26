@@ -1,0 +1,36 @@
+@import '../../assets/styles/variables';
+
+.modal {
+  background-color: $background-modal;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &_block {
+    width: 50%;
+    background-color: $background-color;
+    padding: 15px;
+    border-radius: 8px;
+
+    &__header {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &__content {
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    &__footer {
+      text-align: right;
+    }
+  }
+}
