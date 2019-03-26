@@ -35,6 +35,17 @@
           font-size: 16px;
         }
       }
+
+      &__btn {
+        padding: 0;
+        background: no-repeat;
+        border: none;
+        color: $btn-primary;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+      }
     }
   }
 

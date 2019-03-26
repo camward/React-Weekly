@@ -32,9 +32,9 @@ class Layout extends Component {
                         <span>{t('common.title')}</span>
                     </Link>
                     <div className="layout_header__right-menu">
-                        <a href="javascript:void(0)" onClick={this.handleShow}>
-                            <span>{t('modal.link')}</span>
-                        </a>
+                        <button className="layout_header__right-menu__btn" onClick={this.handleShow}>
+                            {t('modal.link')}
+                        </button>
                         {
                             this.state.showModal && <Portal>
                                 <Modal
