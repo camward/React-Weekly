@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import Layout from '../hoc/layout/layout';
 import {Content} from '../components/content/content';
 
 class App extends Component {
   render() {
     return (
-      <Layout>
-          <Content />
-      </Layout>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Layout>
+                <Content />
+            </Layout>
+        </Suspense>
     );
   }
 }

@@ -3,7 +3,7 @@ import './task-list.scss'
 import {Task} from './task/task'
 import {TaskAddForm} from "../task-add-form/task-add-form"
 import Loader from "../../common/loader/loader"
-import { t } from "i18next"
+import {Lang} from "../../common/lang/lang"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { TASK_STORE } from '../../../store/'
@@ -41,7 +41,7 @@ export class TaskList extends Component {
                         time={task.time}
                     />
                 )
-            }) : t('task.noTaskMessage')
+            }) : <Lang text="task.noTaskMessage" />
 
     }
 

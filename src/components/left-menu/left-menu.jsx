@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './left-menu.scss'
 import {NavLink} from 'react-router-dom'
-import { t } from "i18next"
+import {Lang} from "../common/lang/lang"
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
@@ -56,7 +56,7 @@ export class LeftMenu extends Component {
                         exact={link.exact}
                         onClick={() => this.setDay(link.code)}
                     >
-                        {t(`weekDays.${link.code}`)}
+                        <Lang text="weekDays" variable={link.code} />
                     </NavLink>
                 </li>
             )

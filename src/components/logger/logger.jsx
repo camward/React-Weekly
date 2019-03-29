@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './logger.scss'
 import Loader from "../common/loader/loader"
-import { t } from "i18next"
+import {Lang} from "../common/lang/lang"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { LOGGER_STORE } from '../../store/'
@@ -41,7 +41,7 @@ export class Logger extends Component {
                         </span>
                     </li>
                 )
-            }) : t('log.noResult')
+            }) : <Lang text="log.noResult" />
     }
 
     render() {

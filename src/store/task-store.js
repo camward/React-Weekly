@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx'
 import axios from '../protocol/axios'
-import { t } from "i18next";
+import {Lang} from "../components/common/lang/lang"
+import React from "react";
 
 export class TaskStore {
 
@@ -14,8 +15,8 @@ export class TaskStore {
     @observable formControls = {
         description: {
             value: '',
-            label: t('form.description.label'),
-            errorMessage: t('form.description.error'),
+            label: <Lang text="form.description.label" />,
+            errorMessage: <Lang text="form.description.error" />,
             valid: false,
             touched: false,
             validation: {
@@ -25,8 +26,8 @@ export class TaskStore {
         },
         time: {
             value: '',
-            label: t('form.time.label'),
-            errorMessage: t('form.time.error'),
+            label: <Lang text="form.time.label" />,
+            errorMessage: <Lang text="form.time.error" />,
             valid: false,
             touched: false,
             validation: {
@@ -193,8 +194,8 @@ export class TaskStore {
         this.formControls = {
             description: {
                 value: '',
-                label: t('form.description.label'),
-                errorMessage: t('form.description.error'),
+                label: <Lang text="form.description.label" />,
+                errorMessage: <Lang text="form.description.error" />,
                 valid: false,
                 touched: false,
                 validation: {
@@ -204,8 +205,8 @@ export class TaskStore {
             },
             time: {
                 value: '',
-                label: t('form.time.label'),
-                errorMessage: t('form.time.error'),
+                label: <Lang text="form.time.label" />,
+                errorMessage: <Lang text="form.time.error" />,
                 valid: false,
                 touched: false,
                 validation: {

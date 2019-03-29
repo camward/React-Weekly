@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import classNames from 'classnames'
 import './task.scss'
-import { t } from "i18next"
+import {Lang} from "../../../common/lang/lang"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { TASK_STORE } from '../../../../store/'
@@ -58,16 +58,16 @@ export class Task extends Component {
                                 this.props.taskStore.currentTask.id === task.id
                                 ? <i className="taskList_btn_i taskList_btn_i-cancel"
                                      onClick={() => this.editTask(task, false)}>
-                                        {t('task.cancel')}
+                                        <Lang text="task.cancel" />
                                   </i>
                                 : <i className="taskList_btn_i taskList_btn_i-edit"
                                      onClick={() => this.editTask(task, true)}>
-                                        {t('task.edit')}
+                                        <Lang text="task.edit" />
                                   </i>
                             }
                             <i className="taskList_btn_i taskList_btn_i-delete"
                                onClick={() => this.removeTask(task)}>
-                               {t('task.remove')}
+                               <Lang text="task.remove" />
                             </i>
                         </span>
                     }

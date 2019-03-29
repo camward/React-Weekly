@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { t } from "i18next"
+import {Lang} from "../common/lang/lang"
 import { resetActiveStores } from '../../store'
 
 export class Home extends Component {
@@ -10,7 +10,9 @@ export class Home extends Component {
 
     render() {
         return (
-            <div>{t('common.homeText')}</div>
+            <div>
+                <Lang text="common.homeText" />
+            </div>
         )
     }
 }

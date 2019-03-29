@@ -4,12 +4,13 @@ import './assets/styles/styles.scss';
 import App from './components/app';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
-import pipeline from 'promise-sequence/lib/pipeline'
-import { prepareLocale } from './locale/locale'
+// import pipeline from 'promise-sequence/lib/pipeline'
+// import { prepareLocale } from './locale/locale'
+import './locale/i18n'
 import { stores } from './store'
 import { Provider } from 'mobx-react'
 
-export const LOCALE = 'ru'
+/*export const LOCALE = 'ru'
 
 pipeline([
     () => {
@@ -35,7 +36,7 @@ pipeline([
         console.error(error)
         console.groupEnd()
         startApplication()
-    })
+    })*/
 
 
 const app = (
@@ -46,8 +47,8 @@ const app = (
     </Provider>
 )
 
-function startApplication() {
+// function startApplication() {
     ReactDOM.render(app, document.getElementById('root'));
-}
+// }
 
 serviceWorker.unregister();

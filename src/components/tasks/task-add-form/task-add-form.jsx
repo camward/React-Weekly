@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './task-add-form.scss'
 import Button from "../../common/button/button"
 import Input from "../../common/input/input"
-import { t } from "i18next"
+import {Lang} from "../../common/lang/lang"
 import Loader from "../../common/loader/loader"
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
@@ -116,14 +116,14 @@ export class TaskAddForm extends Component {
                                         disabled={!this.props.taskStore.isFormValid}
                                         onClick={this.updateTask}
                                     >
-                                        {t('form.buttonUpdate')}
+                                        <Lang text="form.buttonUpdate" />
                                   </Button>
                                 : <Button
                                         className="primary"
                                         disabled={!this.props.taskStore.isFormValid}
                                         onClick={this.addTask}
                                     >
-                                        {t('form.buttonAdd')}
+                                        <Lang text="form.buttonAdd" />
                                   </Button>
                             }
                         </form>

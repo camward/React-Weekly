@@ -1,0 +1,10 @@
+@import '../../assets/styles/variables';
+
+.change-lang {
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  outline: none;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { t } from "i18next"
+import {Lang} from "../lang/lang"
 import './input.scss'
 
 function isInvalid({valid, touched, shouldValidate}) {
@@ -30,7 +30,7 @@ const Input = props => {
             />
             {
                 isInvalid(props)
-                    ? <span>{errorMessage || t('error.form')}</span>
+                    ? <span>{errorMessage || <Lang text="error.form" />}</span>
                     : null
             }
         </div>

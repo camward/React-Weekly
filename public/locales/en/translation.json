@@ -1,0 +1,48 @@
+{
+  "common": {
+    "title": "Weekly",
+    "homeText": "Choose a day of the week"
+  },
+  "error": {
+    "error": "Error",
+    "noConnection": "No connection",
+    "form": "Enter correct value"
+  },
+  "form": {
+    "description": {
+      "label": "Task description",
+      "error": "Add description"
+    },
+    "time": {
+      "label": "Period of execution",
+      "error": "Add period"
+    },
+    "buttonAdd": "Add task",
+    "buttonUpdate": "Update task"
+  },
+  "task": {
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "noTaskMessage": "You have no tasks for this day"
+  },
+  "log": {
+    "link": "Logs",
+    "noResult": "No records found"
+  },
+  "modal": {
+    "link": "About",
+    "header": "Modal window",
+    "btnClose": "Close",
+    "content": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
+  },
+  "weekDays": {
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wed": "Wednesday",
+    "thu": "Thursday",
+    "fri": "Friday",
+    "sat": "Saturday",
+    "sun": "Sunday"
+  }
+}
